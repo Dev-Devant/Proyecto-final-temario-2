@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BaguetteController : MonoBehaviour{
 
@@ -9,6 +10,8 @@ public class BaguetteController : MonoBehaviour{
     private Stats stats ;
     private ParticleSystem psGrass;
     public GameObject psg ;
+    public GameObject control;
+    public GameObject character;
     void Start(){
         stats = GetComponent<Stats>();
         psGrass = psg.GetComponent<ParticleSystem>();
@@ -17,20 +20,20 @@ public class BaguetteController : MonoBehaviour{
         Vector3 dir = Vector3.zero;
         bool actPSG = false;
         if (Input.GetKey(KeyCode.W)){
-            dir += transform.right;
+            dir += control.transform.forward;
             actPSG = true;
         }
         if (Input.GetKey(KeyCode.S)){
-            dir -= transform.right;
+            dir -= control.transform.forward;
             actPSG = true;
         }
         if (Input.GetKey(KeyCode.A)){
-            dir += transform.forward;
+            dir -= control.transform.right;
             actPSG = true;
         }
         if (Input.GetKey(KeyCode.D)){           
-            dir -= transform.forward;
-            actPSG = true;       
+            dir += control.transform.right;
+            actPSG = true;     
         }
         if (Input.GetKeyDown(KeyCode.F)){
            stats.takeDamage(10);
